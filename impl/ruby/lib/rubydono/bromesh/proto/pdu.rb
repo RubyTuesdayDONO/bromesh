@@ -1,18 +1,18 @@
+require 'rubydono/bromesh/proto/pdu/header'
+
 module RubyDONO
   module Bromesh
     module Proto
-      module PDU
+      class PDU
         VERSION = 0
 
-        def initialize
+        attr_accessor :header, :body
 
+        def initialize
+          self.header = RubyDONO::Bromesh::Proto::Header.new
         end
 
         def body
-        end
-
-        def header
-
         end
 
         private
