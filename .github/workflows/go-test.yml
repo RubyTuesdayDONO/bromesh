@@ -1,0 +1,26 @@
+name: go-test
+
+# Run go-test for every pushed commit
+on: push
+
+jobs:
+  go-test:
+    name: go test
+    runs-on: ubuntu-latest
+    container:
+      image: golang:latest
+      env:
+        ENV: development
+      options: --cpus 2
+    steps:
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      - name: git checkout
+        uses: actions/checkout@v2
+      # Runs the Super-Linter action
+      - name: super-linter
+        uses: github/super-linter@v3
+        env:
+          DEFAULT_BRANCH: pub
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: go test
+        run: go test
